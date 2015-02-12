@@ -19,7 +19,7 @@
         <ol>
           <li>Login</li>
           <li>View Active Transactions</li>
-          <li>Make A New Transaction.</li>
+          <li>Make A New Transaction</li>
         </ol>
       </div>
     </div>

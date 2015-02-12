@@ -9,6 +9,13 @@ body {
 	font: 500 1.3em normal "Oswald", sans-serif;
 }
 
+a {
+	color: #4d7afb;
+}
+a:hover {
+	color: #023CB8;
+}
+
 header,
 footer {
 	color: #FFF;
@@ -16,14 +23,15 @@ footer {
 }
 header {
 	box-shadow: 5px 0 30px 7px #000;
-	padding: 5px 2%;
-	margin-bottom: 45px;
+	padding: 10px 2%;
+	margin-bottom: 70px;
+	position: relative;
 }
 footer {
 	position: fixed;
 	bottom: 0;
 	text-align: center;
-	font-size: 1.3em;
+	font-size: 1em;
 	width: 100%;
 	padding: 15px 2%;
 	box-shadow: -5px 0 30px 7px #000;
@@ -46,10 +54,11 @@ h6,
 }
 h1,
 #logo {
-	font-size: 2.5em;
+	font-size: 3em;
 }
 h2 {
-	font-size: 2em;
+	font-size: 2.5em;
+	margin-bottom: 20px;
 }
 
 #logo {
@@ -60,6 +69,24 @@ h2 {
 
 img {
 	max-width: 100%;
+}
+
+input[type*="submit"],
+input[type*="reset"],
+input[type*="button"],
+button,
+.button {
+	background: #4d7afb;
+	color: #FFFFFF;
+	padding: 5px 30px;
+	border: none;
+}
+input[type*="submit"]:hover,
+input[type*="reset"]:hover,
+input[type*="button"]:hover,
+button:hover,
+.button:hover {
+	background: #023CB8;
 }
 
 .module-wrapper {
@@ -115,6 +142,43 @@ img {
 	width: 15%;
 }
 
+.sidebar-nav ul {
+	margin: 0;
+	padding: 0;
+}
+.sidebar-nav li {
+	list-style-type: none;
+}
+.sidebar-nav a {
+	font-size: 1.4em;
+	text-decoration: none;
+}
+
+#personalized_welcome {
+	position: absolute;
+	top: 0;
+	right: 0;
+	text-align: center;
+	background: #333;
+	padding: 10px 1% 1%;
+	box-shadow: 21px 0 15px 7px #000;
+}
+
+.personal_profile_pic {
+	display: block;
+}
+.personal_profile_pic img {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 13px 3px #000;
+}
+.personal_name {
+	color: #fb4d4d;
+}
+.logout {
+	display: none;
+}
 
 /* Login Page */
 .login {
@@ -136,6 +200,24 @@ img {
 .lent-view {
 	width: 47%;
 }
+
+.transactions {
+	text-align: center;
+}
+
+.transaction {
+	margin: 15px 0;
+	padding: 25px 0 13px;
+	box-shadow: inset 0px 0px 15px 2px;
+}
+.transaction:nth-child(odd) {
+	background: #EEE;
+}
+
+.transaction img {
+	height: 115px;
+}
+
 .trans_left,
 .trans_right,
 .arrow-right {
@@ -144,9 +226,11 @@ img {
 .trans_left,
 .trans_right {
 	display: inline-block;
-	width: 36%;
-	margin: 0 3%;
+	margin: 0 5%;
 	text-align: center;
+}
+.trans_left {
+	width: 36%;
 }
 .arrow-right {
 	display: inline-block;
@@ -162,6 +246,7 @@ img {
 }
 
 .trans_user_picture {
+	width: 115px;
 	border-radius: 50%;
 	box-shadow: 0px 0px 13px 3px #000;
 }

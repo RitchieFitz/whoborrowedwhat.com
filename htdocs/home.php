@@ -25,7 +25,7 @@ if (!isset($_SESSION['loggedin'])) {
 
    <header class='main_nav'>
       <a href="index.php" id='logo'>Who Borrowed What?</a>
-      <!-- <div id='personalized_welcome'><?php personalizedWelcom();?></div> -->
+      <div id='personalized_welcome'><?php personalizedWelcom();?></div>
    </header>
 
    <div class="page-container center">
@@ -33,9 +33,10 @@ if (!isset($_SESSION['loggedin'])) {
          <div class='module'>
             <nav class="sidebar-nav">
                <ul>
-                  <li>New Transation</li>
-                  <li>Borrowed History</li>
-                  <li>Lent History</li>
+                  <li><a href="#">New Transation</a></li>
+                  <li><a href="#">Borrowed History</a></li>
+                  <li><a href="#">Lent History</a></li>
+                  <li><a href="logout.php">Logout</a></li>
                </ul>
             </nav>
          </div>
@@ -43,40 +44,44 @@ if (!isset($_SESSION['loggedin'])) {
       <div class="content">
          <div class="module-wrapper borrowed-view">
             <div class='module'>
-               <h1>Borrowed</h1>
-               <?php 
-               $borrowedTransactions = getBorrowedTransactions($_SESSION['user_id']);
-               foreach ($borrowedTransactions as $key => $value) {
-                  echo "<div class='transaction'><div class='trans_left'>";
-                  echo "<img class='trans_item_picture' src='" . $value['item_picture'] . "' /><span class='trans_item_name'>". $value['name'] . "</span></div>";
-                  echo "<div class='arrow-right'> </div>";
-                  echo "<div class='trans_right'> <img class='trans_user_picture' src='" . $value['profile_picture'] . "' /><span class='trans_user_name'>" . $value['name_first'] . " " . $value['name_last'] . "</span></div>";
-                  echo "</div>";
-               }
-               ?>
+               <h2>Borrowed From</h2>
+               <div class="transactions">
+                  <?php 
+                  $borrowedTransactions = getBorrowedTransactions($_SESSION['user_id']);
+                  foreach ($borrowedTransactions as $key => $value) {
+                     echo "<div class='transaction'><div class='trans_left'>";
+                     echo "<img class='trans_item_picture' src='" . $value['item_picture'] . "' /><span class='trans_item_name'>". $value['name'] . "</span></div>";
+                     echo "<div class='arrow-right'> </div>";
+                     echo "<div class='trans_right'> <img class='trans_user_picture' src='" . $value['profile_picture'] . "' /><span class='trans_user_name'>" . $value['name_first'] . " " . $value['name_last'] . "</span></div>";
+                     echo "</div>";
+                  }
+                  ?>
+               </div>
             </div>
          </div> <!-- end of borrowed module -->
          <div class="module-wrapper lent-view">
             <div class="module">
-               <h1>Lent</h1>
-               <?php 
-               $lentTransactions = getLentTransactions($_SESSION['user_id']);
-               foreach ($lentTransactions as $key => $value) {
-                  echo "<div class='transaction'><div class='trans_left'>";
-                  echo "<img class='trans_item_picture' src='" . $value['item_picture'] . "' /><span class='trans_item_name'>". $value['name'] . "</span></div>";
-                  echo "<div class='arrow-right'> </div>";
-                  echo "<div class='trans_right'> <img class='trans_user_picture' src='" . $value['profile_picture'] . "' /><span class='trans_user_name'>" . $value['name_first'] . " " . $value['name_last'] . "</span></div>";
-                  echo "</div>";
-               }
-               ?>
+               <h2>Lent To</h2>
+               <div class="transactions">
+                  <?php 
+                  $lentTransactions = getLentTransactions($_SESSION['user_id']);
+                  foreach ($lentTransactions as $key => $value) {
+                     echo "<div class='transaction'><div class='trans_left'>";
+                     echo "<img class='trans_item_picture' src='" . $value['item_picture'] . "' /><span class='trans_item_name'>". $value['name'] . "</span></div>";
+                     echo "<div class='arrow-right'> </div>";
+                     echo "<div class='trans_right'> <img class='trans_user_picture' src='" . $value['profile_picture'] . "' /><span class='trans_user_name'>" . $value['name_first'] . " " . $value['name_last'] . "</span></div>";
+                     echo "</div>";
+                  }
+                  ?>
+               </div>
             </div> <!-- end of lent view -->
          </div> <!-- end of lent module -->
       </div> <!-- end of content -->
    </div> <!-- end of page container -->
 
    <footer>
-    <span>&copy; 2015 WhoBorrowedWhat.com, All Rights Reserved</span>
- </footer>
+     <span>&copy; 2015 WhoBorrowedWhat.com, All Rights Reserved</span>
+  </footer>
 
 </body>
 </html>
