@@ -80,6 +80,7 @@ button,
 	color: #FFFFFF;
 	padding: 5px 30px;
 	border: none;
+	text-decoration: none;
 }
 input[type*="submit"]:hover,
 input[type*="reset"]:hover,
@@ -87,6 +88,7 @@ input[type*="button"]:hover,
 button:hover,
 .button:hover {
 	background: #023CB8;
+	color: #FFFFFF;
 }
 
 .module-wrapper {
@@ -193,6 +195,26 @@ button:hover,
 
 .login-submit {
 	margin: 20px 0 0;
+}
+
+.blur {
+	display: none;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.81);
+}
+
+.sign-up {
+	display: none;
+	width: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-left: -200px;
+	margin-top: -105px;
+	z-index: 999;
 }
 
 /* User Home Page */

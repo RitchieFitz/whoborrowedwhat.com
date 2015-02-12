@@ -38,6 +38,7 @@
           </div>
           <div class="center login-submit">
             <input type="submit" value="Login">
+            <a class="button sign-button" href="#">Sign Up</a>
           </div>
         </form>
       </div>
@@ -46,5 +47,26 @@
   <footer>
     <span>&copy; 2015 WhoBorrowedWhat.com, All Rights Reserved</span>
   </footer>
+  <div class="blur"></div>
+  <div class="module-wrapper sign-up">
+    <div class="module">
+      <form action="" method="POST">
+        <div class="horizontal">
+          <label for="first">First Name:</label>
+          <input type="text" name="first" placeholder="John" required>
+          <br>
+          <label for="last">Last Name:</label>
+          <input type="text" name="last" placeholder="Doe" required>
+          <br>
+          <label for="email">Email:</label>
+          <input type="text" name="email" placeholder="example@example.com" required>
+          <br>
+        </div>
+        <div class="center">
+          <input type="submit" value="Sign In">
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
