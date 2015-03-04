@@ -7,6 +7,7 @@ body {
 	background-color: #222;
 	color: #333;
 	font: 500 1.3em normal "Oswald", sans-serif;
+	padding-bottom: 100px;
 }
 
 a {
@@ -91,6 +92,22 @@ button:hover,
 	color: #FFFFFF;
 }
 
+.long-button {
+	height: 100%;
+	width: 100%;
+	display: inline-block;
+	padding: 10px 0;
+	font-size: 1.2em;
+}
+
+input[type*=file] {
+	display: inline-block !important;
+	width: 300px;
+	vertical-align: middle;
+	/* font: normal normal normal 11px/normal 'Lucida Grande'; */
+	font-size: 11px;
+}
+
 .module-wrapper {
 	background: #eee;
 	padding: 1%;
@@ -132,6 +149,18 @@ button:hover,
 .horizontal label {
 	width: 100px;
 	display: inline-block;
+}
+.register .horizontal label,
+.new-transaction .horizontal label {
+	width: 160px;
+}
+
+select[name*=lendTo] {
+	vertical-align: middle;
+}
+
+label[for*=description] {
+	vertical-align: top;
 }
 
 .content {
@@ -271,5 +300,13 @@ button:hover,
 	width: 115px;
 	border-radius: 50%;
 	box-shadow: 0px 0px 13px 3px #000;
+}
+
+.trans_details {
+	font-size: .8em;
+}
+
+.returned {
+	margin: 25px 0 -13px;
 }
 

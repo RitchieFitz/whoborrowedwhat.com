@@ -1,87 +1,85 @@
 <?php 
-// Bring in the View of the MVC pattern
-if (!isset($_SESSION['loggedin'])) {
-//header( 'Location: http://www.yoursite.com/new_page.html' ) 
-   header('Location: index.php');
+// Get access to the session
+if (!isset($_SESSION)) {
+ session_start();
+  // If they haven't logged in then pull up login screen
+ if (!isset($_SESSION['loggedin'])) {
+    header("Location: login.php");
+    die();
+ }
 }
+// This variable will be used to display information about submissions or data changes
+$message = "";
+// Get access to the model
+include 'model.php';
+// Get access to the custom functions library
+include 'library/functions.php';
+
 ?>
 <!DOCTYPE html>
 <!-- This is the View in the MVC pattern -->
 <html lang="en">
 <head>
    <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width">
    <title>Who Borrowed What | Home</title>
+   <!-- <link rel="stylesheet" type="text/css" href="css/who_bowwored_what.css" media="screen" > -->
    <link rel="stylesheet" type="text/css" href="css/normalize.css" media="screen" >
    <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" >
+   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+   <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+   <script src="js/custom.js"></script>
 </head>
 <body>
-   <?php
-   $display = FALSE;
-   if ($display) {
-      echo "<div class='filter'></div> <div class='popout'></div>"; 
-   }
-   ?>
 
-   <header class='main_nav'>
-      <a href="index.php" id='logo'>Who Borrowed What?</a>
-      <div id='personalized_welcome'><?php personalizedWelcom();?></div>
-   </header>
+</div>
 
-   <div class="page-container center">
-      <div class="module-wrapper sidebar-container">
-         <div class='module'>
-            <nav class="sidebar-nav">
-               <ul>
-                  <li><a href="#">New Transation</a></li>
-                  <li><a href="#">Borrowed History</a></li>
-                  <li><a href="#">Lent History</a></li>
-                  <li><a href="logout.php">Logout</a></li>
-               </ul>
-            </nav>
-         </div>
-      </div> <!-- end of sidebar-nav module -->
-      <div class="content">
-         <div class="module-wrapper borrowed-view">
-            <div class='module'>
-               <h2>Borrowed From</h2>
-               <div class="transactions">
-                  <?php 
-                  $borrowedTransactions = getBorrowedTransactions($_SESSION['user_id']);
-                  foreach ($borrowedTransactions as $key => $value) {
-                     echo "<div class='transaction'><div class='trans_left'>";
-                     echo "<img class='trans_item_picture' src='" . $value['item_picture'] . "' /><span class='trans_item_name'>". $value['name'] . "</span></div>";
-                     echo "<div class='arrow-right'> </div>";
-                     echo "<div class='trans_right'> <img class='trans_user_picture' src='" . $value['profile_picture'] . "' /><span class='trans_user_name'>" . $value['name_first'] . " " . $value['name_last'] . "</span></div>";
-                     echo "</div>";
-                  }
-                  ?>
-               </div>
-            </div>
-         </div> <!-- end of borrowed module -->
-         <div class="module-wrapper lent-view">
-            <div class="module">
-               <h2>Lent To</h2>
-               <div class="transactions">
-                  <?php 
-                  $lentTransactions = getLentTransactions($_SESSION['user_id']);
-                  foreach ($lentTransactions as $key => $value) {
-                     echo "<div class='transaction'><div class='trans_left'>";
-                     echo "<img class='trans_item_picture' src='" . $value['item_picture'] . "' /><span class='trans_item_name'>". $value['name'] . "</span></div>";
-                     echo "<div class='arrow-right'> </div>";
-                     echo "<div class='trans_right'> <img class='trans_user_picture' src='" . $value['profile_picture'] . "' /><span class='trans_user_name'>" . $value['name_first'] . " " . $value['name_last'] . "</span></div>";
-                     echo "</div>";
-                  }
-                  ?>
-               </div>
-            </div> <!-- end of lent view -->
-         </div> <!-- end of lent module -->
-      </div> <!-- end of content -->
-   </div> <!-- end of page container -->
+<header class='main_nav'>
+   <a href="index.php" id="logo">Who Borrowed What?</a>
+   <div id='personalized_welcome'><?php personalizedWelcome();?></div>
+</header>
 
-   <footer>
-     <span>&copy; 2015 WhoBorrowedWhat.com, All Rights Reserved</span>
-  </footer>
+<div class="page-container center">
+   <!-- Show side nav bar -->
+   <?php include 'modules/sideNavBar.php'; ?>
+
+   <div class='content'>
+      <?php
+      if (!empty($_GET) && $_GET['name'] == "nt") {
+         include "modules/newTransaction.php";
+      } else if (!empty($_GET) && $_GET['name'] == "th") {
+         $_SESSION['FROM_URL'] = $_SERVER['QUERY_STRING'];
+         include 'modules/transactionHistory.php';
+      } else if (!empty($_GET) && $_GET['name'] == "ct") {
+         updateTransaction($_GET['value'], "NO");
+         if (isset($_SESSION['FROM_URL'])) {
+            parse_str($_SESSION['FROM_URL']);
+            if ($name == 'th') {           
+               include "modules/transactionHistory.php";
+            }
+            unset($_SESSION['FROM_URL']);
+         } else {
+            include "modules/transactionsView.php";
+         }    
+      } else if (!empty($_POST['upload'])) {
+         if (!empty($_FILES['fileToUpload']['name'])) {
+            $okToUpload = imageUpload(isset($_POST));
+            if ($okToUpload) {
+               createTransaction($_SESSION['item_picture']);
+            }
+            include "modules/transactionsView.php";
+         } else {
+            $_SESSION['message'] = "You didn't select a file to upload.";
+         }
+      } else {
+         include "modules/transactionsView.php";
+      }
+      ?>
+   </div>
+</div>
+
+<footer>
+ <span>© 2015 WhoBorrowedWhat.com, All Rights Reserved</span>
+</footer>
 
 </body>
 </html>
