@@ -29,7 +29,7 @@ if (!isset($_SESSION['loggedin'])) {
      header("Location: home.php");
      die();
    } else {
-    $_SESSION['message'] = "There was an error in logging in: ";
+    $_SESSION['message'] = "There was an error in logging in.";
     header("Location: login.php");
     die();
   }

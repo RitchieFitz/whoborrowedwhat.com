@@ -132,6 +132,10 @@ input[type*=file] {
 	text-align: center;
 }
 
+.block {
+	display: block;
+}
+
 .center .module {
 	text-align: left;
 }

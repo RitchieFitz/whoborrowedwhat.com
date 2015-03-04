@@ -146,10 +146,10 @@ function registerUser() {
 	$confirmPassword = $_POST['password_confirm'];
 	if (validateMatchingPassword($password, $confirmPassword)) {
 		$result = addUser($password);
-		if ($result) {
+		if (!$result) {
 			$message = "You are now Registered!";
 		} else {
-			$message = "Registration faild.";
+			$message = "Registration failed.";
 		}		
 	} else {
 		$message = "Passwords do not match.";
