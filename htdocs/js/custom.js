@@ -1,11 +1,23 @@
 $(document).ready(function () {
 	console.log("We are connected!");
-	if ($(".long-button").length > 0) {
-		$(".long-button").click(function () {
-			console.log("Value: " + $(this).value);
-			returned($(this).value);
-			$(this).parent().parent().toggle("explode");
-		});
+
+	settings();
+	wrapContent();
+
+	function settings() {
+		if ($(".long-button").length > 0) {
+			$(".long-button").click(function () {
+				console.log("Value: " + $(this).value);
+				returned($(this).value);
+				$(this).parent().parent().toggle("explode");
+			});
+		}
+	}
+
+	function wrapContent() {
+		if ($(".content .message").length > 0) {
+			$(".content .message").wrap("<div class='module-wrapper block'><div class='module'></div></div>");
+		}
 	}
 
 	function returned(destination) {

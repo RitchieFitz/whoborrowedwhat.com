@@ -249,8 +249,6 @@ function addUser($password) {
 	// $result =  0 - indicates false
 	// $result = -1 - indicates an error
 
-		// $sql = "INSERT INTO account(user_id, username, password, date_created, last_updated, profile_picture, profile_description)
-		// VALUES ($new_id, :username, :password, :date_created, :last_updated, 'pictures/profile_pictures/generic_profile.png', 'No description has been entered by $_POST[name_first] yet...')";
 		$sql = "INSERT INTO account 
 		(	user_id            
 			, username           
@@ -262,38 +260,40 @@ function addUser($password) {
 			, profile_description
 			, account_type
 			) values 
-( $new_id
-	, :username
-	, :password
-	, :date_created
-	, :last_updated
-	, 1
-	, 'pictures/profile_pictures/generic_profile.png'
-	, :profile_description
-	, 'user'
-	)";
+		( $new_id
+			, :username
+			, :password
+			, :date_created
+			, :last_updated
+			, 1
+			, 'pictures/profile_pictures/generic_profile.png'
+			, :profile_description
+			, 'user'
+			)";
 
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(':username', $_POST['email'], PDO::PARAM_STR);
-$stmt->bindValue(':password', $password, PDO::PARAM_STR);
-$stmt->bindValue(':date_created', date("Y-m-d"), PDO::PARAM_STR);
-$stmt->bindValue(':last_updated', date("Y-m-d"), PDO::PARAM_STR);
-$stmt->bindValue(':profile_description', $description = 'No description has been entered for ' . $_POST['name_first'] . ' yet.', PDO::PARAM_STR);
-$result = $stmt->execute();
-$stmt->closeCursor();
-if (!$result) {
-	throw new Exception($conn->error);
-}
+		$stmt = $conn->prepare($sql);
+		$stmt->bindValue(':username', $_POST['email'], PDO::PARAM_STR);
+		$stmt->bindValue(':password', $password, PDO::PARAM_STR);
+		$stmt->bindValue(':date_created', date("Y-m-d"), PDO::PARAM_STR);
+		$stmt->bindValue(':last_updated', date("Y-m-d"), PDO::PARAM_STR);
+		$stmt->bindValue(':profile_description', $description = 'No description has been entered for ' . $_POST['name_first'] . ' yet.', PDO::PARAM_STR);
+		$result = $stmt->execute();
+		$stmt->closeCursor();
+
+		if (!$result) {
+			throw new Exception($conn->error);
+		}
 
      // If we arrive here, it means that no exception was thrown
      // i.e. no query has failed, and we can commit the transaction
-$conn->commit();
-} catch (Exception $e) {
-    // An exception has been thrown
-    // We must rollback the transaction
-	echo "<br>We had to roll back the transaction...<br>";
-	$conn->rollback();
-}
+		$conn->commit();
+	}
+	catch (Exception $e) {
+	    // An exception has been thrown
+	    // We must rollback the transaction
+		echo "<br>We had to roll back the transaction...<br>";
+		$conn->rollback();
+	}
 }
 
 function getItemNumber() {
