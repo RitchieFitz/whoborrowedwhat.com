@@ -2,7 +2,7 @@
 	<div class="module">
 		<h2>New Transaction</h2>
 		<form action='home.php' method='POST' class='newTransaction' enctype='multipart/form-data' autocomplete="off">
-			<?php displayMessage($message); ?>
+			<?php if (isset($_SESSION["message"])) {displayMessage($message);} ?>
 			<div class="horizontal">
 				<div class="left">
 					<label for='lendTo'>Lend to:</label>
